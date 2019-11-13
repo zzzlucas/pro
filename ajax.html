@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ajax</title>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+  </script>
+
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+  <button id="btn1">btn1发送一个 HTTP 请求并获取返回结果</button>
+  <button id="btn2">btn2发送一个 HTTP 请求并获取返回结果</button>
+
+
+  <script>
+
+
+
+
+
+    $("#btn2").click(function () {
+      $.get("http://api.tianapi.com/keji/", { key: "d1802f2150a29920926efd31f030b6bd", num: 10 }, function (data, status) {
+        da = data.newslist;
+        // console.log(da[0].picUrl);
+        for (i = 0; i < da.length; i++) {
+          // console.log(da[i].picUrl);
+          var context = `<div><img src='${da[i].picUrl}'></div>`; //es6语法模板字符串
+          // var context = "<div><img src='" + da[i].picUrl + "'></div>";  
+          $('#app').append(context)
+        }
+      });
+    });
+
+
+  </script>
+</body>
+
+</html>

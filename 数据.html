@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据</title>
+</head>
+
+<body>
+    <script>
+
+        let res = {
+            result: [
+                {
+                    year: 2019,
+                    month: 10,
+                    weather: '晴',
+                    type: 'SJ'
+                }, {
+                    // 2019 预算
+                    year: 2019,
+                    month: 0,
+                    weather: '小雨',
+                    type: 'YS'
+                },
+                // {
+                //     // 2018 预算
+                //     year: 2018,
+                //     month: 0,
+                //     weather: '小雨',
+                //     type: 'YS'
+                // }, {
+                //     year: 2018,
+                //     month: 11,
+                //     weather: '小雨',
+                //     type: 'SJ'
+                // },
+                {
+                    year: 2019,
+                    month: 12,
+                    weather: '大雨',
+                    type: 'SJ'
+                }, {
+                    year: 2019,
+                    month: 2,
+                    weather: '小雨',
+                    type: 'SJ'
+                }, {
+                    year: 2019,
+                    month: 5,
+                    weather: '阴',
+                    type: 'SJ'
+                }, {
+                    year: 2019,
+                    month: 8,
+                    weather: '雪',
+                    type: 'SJ'
+                }
+            ]
+        }
+
+
+
+        //先把年份加进 RealDataSource ，根据年份丢进月份
+        //然后给年份排序，再给同年里的按月份排序
+        function getRealDataSource() {
+            let RealDataSource = [
+                // { type: 'YS', year: '2019', children: [] }
+            ]
+            for (item of res.result) {
+
+                //假设都是2019年的
+                if (item.type == "YS" && item.year == '2019') {
+                    RealDataSource.push(item)
+                    RealDataSource[0].children = []
+                }
+
+                function sortMonth(a, b) {
+                    return a.month - b.month
+                }
+
+                // if (item.type == "SJ" && RealDataSource[0] == true) {
+                if (item.type == "SJ") {
+                    RealDataSource[0].children.push(item)
+                    RealDataSource[0].children.sort(sortMonth);
+                }
+            }
+            console.log(RealDataSource);
+        }
+
+        getRealDataSource()</script>
+</body>
+
+</html>

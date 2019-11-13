@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+ <body>
+    <div id="app">
+              <child :msg="msg" @update:msg="msg = $event"></child>
+    </div>
+    <script>
+        const child = {
+            template: `
+        <div>
+              {{msg}}
+        <hr />
+             <button @click="changeMsg">点击</button>
+            </div>
+         `,
+            props: {
+                msg: String,
+                // value:String,
+                
+            },
+            methods: {
+                changeMsg() {
+                    // this.msg = "新的内容"
+                    this.$emit('update:msg', '新1的内容')
+                }
+            }
+        }
+        Vue.component('child', child)
+        const app = new Vue({
+            el: "#app",
+            data: {
+                msg: '父组件中的数据'
+            }
+        })
+    </script>
+</body>
+
+</html>

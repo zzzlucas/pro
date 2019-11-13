@@ -1,0 +1,35 @@
+*{
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+}
+
+a{
+    background : -webkit-linear-gradient(bottom, black, white);
+    background : -moz-linear-gradient(bottom, black, white);
+    background : -o-linear-gradient(bottom, black, white);
+    background : linear-gradient(to top, black, white);
+    display : -webkit-flex;
+    display : -moz-box;
+
+    display : flex
+}
+
+::-webkit-input-placeholder {
+    color : #ccc
+}
+
+:-moz-placeholder {
+    color : #ccc
+}
+
+::-moz-placeholder {
+    color : #ccc
+}
+
+:-ms-input-placeholder {
+    color : #ccc
+}
+
+::placeholder {
+    color : #ccc
+}

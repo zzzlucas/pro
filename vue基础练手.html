@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue基础练习</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0/axios.js"></script>
+    <!-- <script src="https://gitee.com/shendusimba/simbajs/raw/master/simba.js"></script> -->
+
+    <style>
+        .container {
+            margin: 50px auto;
+            padding: 30px;
+            width: 860px;
+            border: 1px solid #eee
+        }
+
+        .active {
+            background-color: orange;
+        }
+
+        ul {
+            display: flex;
+            padding: 0;
+        }
+
+        .one li {
+            width: 80px;
+            /* height: ; */
+            list-style: none;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .ten li {
+            list-style: none;
+            border: 1px dashed #ccc;
+            width: 950px;
+            height: 245px;
+            padding: 30px 30px 0;
+            display: flex;
+
+        }
+
+        .ten {
+            display: block;
+        }
+
+        .ten img {
+            width: 155px;
+            height: 205px;
+        }
+
+        .dsc {
+            padding: 0px 20px;
+        }
+
+        .dsc div {
+            color: #999;
+            font-size: 14px;
+            line-height: 28px;
+        }
+
+        .dsc div:first-child {
+            color: #333;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .dsc span {
+            color: #ff1268;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 20px;
+            font-style: normal;
+        }
+
+        /* .tn li{
+            padding-bottom: 0
+        } */
+        .dimg,
+        .dsc {
+            height: 205px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <ul class="one">
+                <li v-for="item in city" :class="{active:item.id === activeIndex} " @click="activeIndex=item.id">
+                    {{item.name}}
+                </li>
+            </ul>
+            <ul class="one">
+                <li v-for="item in type" :class="{active:item.id === activeType} " @click="activeType=item.id">
+                    {{item.name}}
+                </li>
+
+            </ul>
+
+            <ul class="ten">
+                <li v-for="item in showList">
+                    <div class="dimg"><img :src="item.img" alt=""></div>
+                    <div class="dsc">
+                        <div>{{item.title}}</div>
+                        <div>艺人：{{item.name}}</div>
+                        <div>{{item.city}}|{{item.address}}</div>
+                        <div>{{item.time}}</div>
+                        <div><span>{{item.priceStr}}元</span>{{item.state|fmtState}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                activeType: 0,
+                activeIndex: 0,
+                city: [
+                    { id: 0, name: '全部:' },
+                    { id: 1, name: '嘉兴' },
+                    { id: 2, name: '杭州' },
+                    { id: 3, name: '宁波' },
+                    { id: 4, name: '金华' }
+                ],
+                type: [
+                    { id: 0, name: '全部:' },
+                    { id: 1, name: '演唱会' },
+                    { id: 2, name: '话剧' },
+                    { id: 3, name: '越剧' },
+                    { id: 4, name: '京剧' }
+                ],
+                showList: [
+                    {
+                        id: '1',
+                        title: '【宁波】 王力宏“龙的传人2060”世界巡演宁波站',
+                        img: 'https://img.alicdn.com/bao/uploaded/i4/2251059038/O1CN019SpIes2GdSCgGAIUa_!!0-item_pic.jpg_q60.jpg_.webp',
+                        city: '宁波',
+                        address: '宁波富邦体育场',
+                        time: '2019.11.16 周六 19:30',
+                        priceStr: '380-1580',
+                        state: 1,
+                        name: '王力宏'
+                    },
+                    {
+                        id: '1',
+                        title: '【宁波】 王力宏“龙的传人2060”世界巡演宁波站',
+                        img: 'https://img.alicdn.com/bao/uploaded/i4/2251059038/O1CN019SpIes2GdSCgGAIUa_!!0-item_pic.jpg_q60.jpg_.webp',
+                        city: '宁波',
+                        address: '宁波富邦体育场',
+                        time: '2019.11.16 周六 19:30',
+                        priceStr: '380-1580',
+                        state: 1,
+                        name: '王力宏'
+                    },
+                ]
+
+            },
+            created() {
+                // this.getShowList()
+            },
+            methods: {
+                // getShowList() {
+                //     axios.get('https://www.easy-mock.com/mock/5d9f59fd56cc7f41d470bfcb/vuedemo/showlist').then(
+                //         res => {
+                //             this.showList = res.data.showList
+                //             console.log(res.data.showList);
+                //         }
+                //     )
+                // }
+
+            },
+            filters: {
+                fmtState(val) {
+                    switch (val) {
+                        case 0:
+                            return '售票中'
+                        case 1:
+                            return '售罄'
+                        case 2:
+                            return '待开票'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
